@@ -1,0 +1,17 @@
+[package]
+name = "robo-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Pure-Rust, hardware-independent control logic for the robo racer (host-testable)"
+
+[lib]
+name = "robo_core"
+path = "src/lib.rs"
+
+[dependencies]
+# SHA-1 is the WebSocket handshake (RFC 6455) and is `no_std`-capable.
+sha1 = { version = "=0.10.7", default-features = false }
+
+[dev-dependencies]
+proptest = "1"

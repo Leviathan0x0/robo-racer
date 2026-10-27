@@ -1,0 +1,37 @@
+# ESP32 build configuration.
+#
+# This file lives in `firmware/` on purpose: the `[unstable] build-std` key is
+# only valid on a nightly toolchain, and the host-side unit tests
+# (`cargo test -p robo-core`) are built with stable Rust from the repo root.
+
+# Linking uses the `rust-lld` shipped with the ESP Rust toolchain instead of the
+# Espressif GCC cross-compiler. esp-hal ships a preprocessed `linkall.x`
+# (GNU ld / LLD script syntax) in its build script output, so no external
+# toolchain is required. This keeps `cargo build` working on Windows and
+# macOS without a separate ESP-IDF installation.
+#
+# The ESP-IDF GCC toolchain (`xtensa-esp32-elf-gcc`) remains an alternative:
+# drop the two `-C linker*` flags below and rustc will use the target default.
+
+[target.'cfg(target_arch = "xtensa")']
+runner    = "espflash flash --monitor"
+rustflags = [
+    "-C", "linker=rust-lld",
+    "-C", "linker-flavor=ld.lld",
+    "-C", "link-arg=-Tlinkall.x",
+]
+
+[target.'cfg(target_arch = "riscv32")']
+runner    = "espflash flash --monitor"
+rustflags = [
+    "-C", "linker=rust-lld",
+    "-C", "linker-flavor=ld.lld",
+    "-C", "link-arg=-Tlinkall.x",
+    "-C", "force-frame-pointers",
+]
+
+[env]
+ESP_LOG = "info"
+
+[unstable]
+build-std = ["core", "alloc"]

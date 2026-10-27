@@ -1,0 +1,26 @@
+menu "Robo Racer"
+
+config ROBO_WIFI_SSID
+    string "SoftAP SSID"
+    default "robo-racer"
+    help
+        Name the phone joins. 1 to 32 characters.
+
+config ROBO_WIFI_PASS
+    string "SoftAP password"
+    default ""
+    help
+        WPA2 password, 8 to 63 characters. Leave this empty to generate a
+        new password on every boot and print it on the serial console.
+        The password is never embedded in the web page.
+
+config ROBO_WIFI_CHANNEL
+    int "SoftAP channel"
+    range 1 13
+    default 6
+    help
+        Fixed channel. Pick a quiet one at the venue. Command frames are
+        sent immediately (no AMPDU), so a clean channel matters more than
+        peak throughput.
+
+endmenu

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Robo Racer</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="bar">
+  <span id="dot" class="dot" aria-hidden="true"></span>
+  <span id="state" class="state">CONNECTING</span>
+  <span class="spacer"></span>
+  <span id="battery" class="battery">--.- V</span>
+</header>
+
+<main class="pad" id="pad">
+  <div class="cross">
+    <button class="btn up"    data-btn="1" aria-label="Forward">&#9650;</button>
+    <button class="btn left"  data-btn="4" aria-label="Turn left">&#9664;</button>
+    <button class="btn right" data-btn="8" aria-label="Turn right">&#9654;</button>
+    <button class="btn down"  data-btn="2" aria-label="Backward">&#9660;</button>
+  </div>
+  <p id="hint" class="hint">Hold a direction. Release to stop.</p>
+</main>
+
+<footer class="controls">
+  <button id="stop" class="stop" data-btn="16">STOP</button>
+
+  <div class="row">
+    <button id="arm" class="act arm">ARM</button>
+    <button id="disarm" class="act disarm">DISARM</button>
+  </div>
+
+  <div class="row">
+    <div class="modes" role="group" aria-label="Speed mode">
+      <button data-mode="0">SLOW</button>
+      <button data-mode="1" class="on">NORMAL</button>
+      <button data-mode="2">FAST</button>
+    </div>
+    <button id="estop" class="act estop">E-STOP</button>
+  </div>
+
+  <button id="ack" class="act ack" hidden>CLEAR FAULT</button>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

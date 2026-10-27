@@ -1,0 +1,12 @@
+# Build and target artifacts
+target/
+idf/build/
+idf/sdkconfig
+idf/sdkconfig.old
+idf/managed_components/
+idf/dependencies.lock
+
+# OS metadata
+.DS_Store
+**/.DS_Store
+Thumbs.db

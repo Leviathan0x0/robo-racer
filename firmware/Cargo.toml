@@ -1,0 +1,67 @@
+[package]
+name = "robo-firmware"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "ESP32 firmware for the robo racer"
+
+[[bin]]
+name = "robo-racer"
+path = "src/main.rs"
+
+[dependencies]
+robo-core = { workspace = true }
+
+# HAL / runtime
+esp-hal = { version = "=1.2.2", features = ["log-04", "unstable"] }
+esp-alloc = { version = "=0.11.0", features = ["global-allocator"] }
+esp-backtrace = { version = "=0.20.0", features = ["panic-handler", "println"] }
+esp-bootloader-esp-idf = "=0.6.0"
+esp-println = { version = "=0.18.0", features = ["log-04"] }
+esp-radio = { version = "=1.0.0-beta.1", features = ["wifi", "log-04"] }
+esp-rtos = { version = "=0.4.0", features = ["esp-radio", "embassy", "log-04"] }
+
+# Async runtime + network stack
+embassy-executor = "=0.10.0"
+embassy-net = { version = "=0.9.1", features = ["dhcpv4", "medium-ethernet", "tcp", "udp"] }
+embassy-time = "=0.5.1"
+embedded-io-async = "=0.7.0"
+
+# DHCP server for the access point
+edge-dhcp = "=0.8.0"
+edge-nal = "=0.7.0"
+edge-nal-embassy = "=0.9.0"
+
+log = "=0.4.27"
+sha1 = { version = "=0.10.7", default-features = false }
+critical-section = "=1.2.0"
+static_cell = "=2.1.1"
+
+[features]
+default = ["esp32"]
+
+esp32 = [
+    "esp-alloc/esp32",
+    "esp-backtrace/esp32",
+    "esp-bootloader-esp-idf/esp32",
+    "esp-hal/esp32",
+    "esp-radio/esp32",
+    "esp-rtos/esp32",
+]
+esp32s3 = [
+    "esp-alloc/esp32s3",
+    "esp-backtrace/esp32s3",
+    "esp-bootloader-esp-idf/esp32s3",
+    "esp-hal/esp32s3",
+    "esp-radio/esp32s3",
+    "esp-rtos/esp32s3",
+]
+esp32c3 = [
+    "esp-alloc/esp32c3",
+    "esp-backtrace/esp32c3",
+    "esp-bootloader-esp-idf/esp32c3",
+    "esp-hal/esp32c3",
+    "esp-radio/esp32c3",
+    "esp-rtos/esp32c3",
+]
